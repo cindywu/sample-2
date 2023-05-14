@@ -1,14 +1,14 @@
 import Hello from '../components/hello'
 import { supabase } from '../lib/supabaseClient'
 
-export default function Home({ countries }) {
+export default function Home({ cities }) {
   return (
-    <div className={'bg-green-200'}>
+    <div className={'bg-green-200 p-4'}>
       hello world
       <Hello />
-      <ul>
-        {countries.map((country) => (
-          <li key={country.id}>{country.name}</li>
+      <ul className={'bg-yellow-200'}>
+        {cities.map((city) => (
+          <li key={city.id}>{city.name}</li>
         ))}
       </ul>
     </div>
@@ -16,10 +16,10 @@ export default function Home({ countries }) {
 }
 
 export async function getServerSideProps() {
-  let { data } = await supabase.from('countries').select()
+  let { data } = await supabase.from('cities').select()
   return {
     props: {
-      countries: data,
+      cities: data,
     },
   }
 }
